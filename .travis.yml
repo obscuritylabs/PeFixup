@@ -1,4 +1,6 @@
 language: python
+env:
+  - BUILD_LIB=1
 python:
   - "3.4"
   - "3.5"
