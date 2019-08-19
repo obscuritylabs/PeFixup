@@ -11,5 +11,5 @@ python:
   - "3.8-dev"  # 3.8 development branch
   - "nightly"  # nightly build
   
-  before_install:
-    - sudo apt-get install ssdeep
+before_install:
+  - sudo apt-get install ssdeep
