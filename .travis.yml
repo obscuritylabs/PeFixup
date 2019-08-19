@@ -27,7 +27,7 @@ script:
  # - pytest
 
 before_deploy:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin
 
 deploy:
   # deploy development to docker hub
