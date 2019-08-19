@@ -26,9 +26,20 @@ script:
   - ls
  # - pytest
 
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 deploy:
+  # deploy development to docker hub
   provider: script
   script: 
-    - bash ./scripts/release_docker.sh
+    - bash ./scripts/release_docker.sh development
+  on:
+    branch: development
+
+  # deploy master to docker hub
+  provider: script
+  script: 
+    - bash ./scripts/release_docker.sh master
   on:
     branch: master
