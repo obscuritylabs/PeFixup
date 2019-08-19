@@ -6,10 +6,6 @@ env:
     - USERNAME=obscuritylabs
     - IMAGE=pefixup
 
-python:
-  - '3.7'
-  - '3.6'
-
 before_install:
   - sudo apt-get install build-essential libffi-dev libfuzzy-dev ssdeep
 
