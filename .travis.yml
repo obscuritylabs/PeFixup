@@ -12,3 +12,12 @@ python:
   
 before_install:
   - sudo apt-get install build-essential libffi-dev libfuzzy-dev ssdeep
+
+jobs:
+  include:
+    
+    - stage: "Tests" # naming the Tests stage
+      name: "Unit Tests" # start with unit tests
+      script: pytest
+
+    - stage: "Build" # Build our docker image

@@ -1,1 +1,17 @@
+# build file coveralls and nosetests
 
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+omit =
+    *setup.py
+    */docs/*
+    */python?.?/*
+    */site-packages/nose/*
+    *__init__*
+    */thrid_party/*
+    */tests/*
