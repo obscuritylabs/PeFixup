@@ -11,4 +11,4 @@ python:
   - "nightly"  # nightly build
   
 before_install:
-  - sudo apt-get install ssdeep
+  - sudo apt-get install build-essential libffi-dev libfuzzy-dev ssdeep
