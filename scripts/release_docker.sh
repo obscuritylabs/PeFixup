@@ -13,11 +13,10 @@ echo "| Building pefixup Docker version: $VERSION |"
 echo "---------------------------------------------"
 ./scripts/build_docker.sh
 
-# DOCKER TAG/VERSIONING
-docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION
-
 # PUSH TO DOCKER HUB
 if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+	# DOCKER TAG/VERSIONING
+	docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION
     docker push $USERNAME/$IMAGE:latest
 	echo "------------------------------------------------"
 	echo "| Docker image pushed: $USERNAME/$IMAGE:latest |"
@@ -28,6 +27,8 @@ if [[ "$TRAVIS_BRANCH" == "master" ]]; then
 	echo "--------------------------------------------------"
 fi
 if [[ "$TRAVIS_BRANCH" == "development" ]]; then
+	# DOCKER TAG/VERSIONING
+	docker tag $USERNAME/$IMAGE:development $USERNAME/$IMAGE:${git_sha}-development
     docker push $USERNAME/$IMAGE:development
 	echo "------------------------------------------------"
 	echo "| Docker image pushed: $USERNAME/$IMAGE:latest |"
