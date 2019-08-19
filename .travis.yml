@@ -6,6 +6,13 @@ env:
     - USERNAME=obscuritylabs
     - IMAGE=pefixup
 
+python:
+  - '3.6'
+  - '3.7'
+  - '3.7-dev'
+  - '3.8-dev'
+  - 'nightly'
+
 before_install:
   - sudo apt-get install build-essential libffi-dev libfuzzy-dev ssdeep
 
@@ -16,16 +23,15 @@ script:
   - ls
  # - pytest
 
-matrix:
-  include:
-    - python: '3.7'
-    - python: '3.6'
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin
 
-  - stage: release
-    install: skip
-    script: skip
-    before_deploy:
-      - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin
+jobs:
+  include:
+  - stage: deploy
+    python: 3.6
+    install: skip  # no tests, no depedencies needed
+    script: skip  # we're not running tests
     deploy:
       # deploy development to docker hub
       - provider: script
