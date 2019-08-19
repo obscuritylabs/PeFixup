@@ -28,7 +28,7 @@ if [[ "$TRAVIS_BRANCH" == "master" ]]; then
 fi
 if [[ "$TRAVIS_BRANCH" == "development" ]]; then
 	# DOCKER TAG/VERSIONING
-	docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$development
+	docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:development
 	docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:${git_sha}-development
     docker push $USERNAME/$IMAGE:development
 	echo "-----------------------------------------------------"
