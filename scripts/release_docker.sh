@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+git_sha="$(git rev-parse --short HEAD)"
+echo "--------------------------------------"
+echo "| Current git sha: ${git_sha}        |"
+echo "| Current git branch: $TRAVIS_BRANCH |"
+echo "--------------------------------------"
 
 VERSION=`cat VERSION`
 echo "---------------------------------------------"
@@ -10,7 +15,6 @@ echo "---------------------------------------------"
 
 # DOCKER TAG/VERSIONING
 docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION
-git_sha="$(git rev-parse --short HEAD)"
 
 # PUSH TO DOCKER HUB
 if [[ "$TRAVIS_BRANCH" == "master" ]]; then
