@@ -25,23 +25,11 @@ setup(name='pefixup',
           'Programming Language :: Python :: 3.7'
       ],
       install_requires=[
-          'aiodns',
-		  'aiohttp',
-          'beautifulsoup4',
-          'crtsh',
-          'dnsdumpster',
-          'fake_useragent',
-          'json2xml',
-          'requests',
           'setuptools',
-          'termcolor',
-          'tqdm',
-          # Hold uv until windows support: 'uvloop',
-          'validators',
-          'click'
+          '',
       ],
       scripts=[
-          'simplydomain/bin/simply_domain.py'
+          'pefixup/bin/pe_fixup.py'
       ],
       include_package_data=True,
       zip_safe=False)

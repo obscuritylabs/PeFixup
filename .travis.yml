@@ -1,23 +1,34 @@
 dist: bionic
 language: python
 cache: pip
+env:
+  global:
+  - USERNAME=obscuritylabs
+  - IMAGE=pefixup
+  # DOCKER USER
+  - secure: SBZInMAtBBe9CKlco9bs4oyRe5sQbg8s51bINr9CFcFvUOrcVbyksS9a6ggAC11nl1/tR6lsET/dzFfqHUZw1FMI98ld4uRk4ar74xUWp42mtUP5aZAk/XMjz0a/0fiodfuJtsBH2POCDru8RdfJqGUFwKVRSRgf1bl0Dn49N4+MltsTwfixU4ZY7T3C8aO0/J/fU4OCRnAivaW9FyTxDQAmkodLzwIQYD0d/HYVfPc3Q7/Y4UJcKdPBwD+1krrXUfEkCRzXHxjZUZzOdO4zkWVpaEYhzP3UYma5QwDQHt1nwu0kQUGd2I/zs0JfZ44ZBJOago9+KqgyAOY9byGwLvp2mJD00N4i33A/BV/tuRef7nsEg32esp0kzJjNlcVQXSNnzZ44NsSC8QXsi5i6P9sKFU6sRglMYmjoSm1BLhYFL9zzCoMhsqxq90dn22J6d70D/Fh7i433keXez+d6gSjWkKZkzE+ApWWMzpU6BhUbjLEQ1rr1O1nvinBJfaR0B9/ZmkmghaYluKo4O7mO1NcFeDmf6Bc2xUZJEKFRYge1KOXwyF4MS56aSd6go5xO9r1oWptOSN+iegXwN/1y3ZQvzkHqxa7lLzSc5AVzosYU/dEe9WZmnGUD5Am6/9j+EeN+4+78uBfgOMvGzGXPfRfGcpu2Xlr9W5bQiF/l6G4=
+  # DOCKER PW
+  - secure: HBQvXQI3UUBavvPAxW5FqaiU/sWkoajKqKKNwVWVwnNzKqQSGkAYnfuJlUXiv9jjrFtBi2ch/io77DeTJ+5h97M5X40s7cA2fcVQYe/m38dI+kiBdQOwJO/FrCs21lobatm4QNJx70d50fhz62jyX/W3kKRB1fD7t4PJxhKdSZTRhtDkvYXXu+WhQtir+Ec6Tj8Z36EXg98fnTa15MFXS/2GmrsVLObBhau73TbMOhhAk/Yvzn6ndN+/dYAFM1Spr/hbAZ1NspFEyZNGBW9Ac3NZQrFhslDYY3rL+LClj44B++bH8Mw6rByTrcmR9U53a4qQ8ETvvp2EG164H4n1uMnZoPvM/FWhlf4l83sjSy8rSEN3CSbOczKGpmNGifinx+QyWXvzaSWTWjLXFShYgHE+93ueUsad+uR7ZBRUHfGebgdB5zN4IUUaAxfZmV52Z8FxVK89X6yYMwEglqndYnoZHTgwJ14HSwD2ldEp3tWkYw6bL4x5E75/OXzu9uGXvcM1h+Xc+xg1eLjmkaJn0B8WczuTt0whdv0Fzlm1932ZySDbbjAo8ngGiH+LBiAGcg/PYyit79l9R7K9orGzTb3nCa3w8G4TGrVJ5lt1I+eRVsKfFGJbLIp2K/NRfuHUKOIZ7oSU/Z29nHis67PXYytQtBbUMdJ6xHE7IdDiFjs=
 python:
-#  - "3.4"
-#  - "3.5"
-  - "3.6"
-  - "3.7"
-  - "3.7-dev"  # 3.7 development branch
-  - "3.8-dev"  # 3.8 development branch
-  - "nightly"  # nightly build
-  
+  - '3.6'
+  - '3.7'
+  - 3.7-dev
+  - 3.8-dev
+  - nightly
+
 before_install:
   - sudo apt-get install build-essential libffi-dev libfuzzy-dev ssdeep
 
 install:
   - pip install -r requirements.txt
 
-before_script:
-  - ./scripts/build_docker.sh
-
 script:
-  - pytest
+  - ls
+ # - pytest
+
+deploy:
+  provider: script
+  script: 
+    - bash ./scripts/release_docker.sh
+  on:
+    branch: master
