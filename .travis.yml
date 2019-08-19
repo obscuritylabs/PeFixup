@@ -9,9 +9,6 @@ env:
 python:
   - '3.6'
   - '3.7'
-  - '3.7-dev'
-  - '3.8-dev'
-  - 'nightly'
 
 before_install:
   - sudo apt-get install build-essential libffi-dev libfuzzy-dev ssdeep
