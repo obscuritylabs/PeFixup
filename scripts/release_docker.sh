@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -ex
 
 git_sha="$(git rev-parse --short HEAD)"
 echo "--------------------------------------"
