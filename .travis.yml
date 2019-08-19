@@ -23,8 +23,6 @@ script:
   - ls
  # - pytest
 
-before_deploy:
-  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin
 
 jobs:
   include:
@@ -32,6 +30,8 @@ jobs:
     python: 3.6
     install: skip  # no tests, no depedencies needed
     script: skip  # we're not running tests
+    before_deploy:
+      - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin
     deploy:
       # deploy development to docker hub
       - provider: script
