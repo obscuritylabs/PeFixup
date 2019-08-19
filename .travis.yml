@@ -12,9 +12,9 @@ env:
 python:
   - '3.6'
   - '3.7'
-  - 3.7-dev
-  - 3.8-dev
-  - nightly
+  - '3.7-dev'
+  - '3.8-dev'
+  - 'nightly'
 
 before_install:
   - sudo apt-get install build-essential libffi-dev libfuzzy-dev ssdeep
@@ -31,15 +31,15 @@ before_deploy:
 
 deploy:
   # deploy development to docker hub
-  provider: script
-  script: 
-    - bash ./scripts/release_docker.sh development
-  on:
-    branch: development
+  - provider: script
+    script: 
+      - bash ./scripts/release_docker.sh
+    on:
+      branch: development
 
   # deploy master to docker hub
-  provider: script
-  script: 
-    - bash ./scripts/release_docker.sh master
-  on:
-    branch: master
+  - provider: script
+    script: 
+      - bash ./scripts/release_docker.sh
+    on:
+      branch: master
