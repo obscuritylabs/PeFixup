@@ -6,7 +6,7 @@ VERSION=`cat VERSION`
 echo "---------------------------------------------"
 echo "| Building pefixup Docker version: $VERSION |"
 echo "---------------------------------------------"
-./build_docker.sh
+./scripts/build_docker.sh
 
 # DOCKER TAG/VERSIONING
 docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION
