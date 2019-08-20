@@ -19,7 +19,10 @@ install:
 
 script:
   - ls
- # - pytest
+  # - pytest
+  # test to make sure build passes
+  - python setup.py build 
+  - python setup.py install 
 
 after_success:
   - coveralls
@@ -27,7 +30,7 @@ after_success:
 
 jobs:
   include:
-  - stage: deploy
+  - stage: Deploy Docker
     python: 3.6
     install: skip  # no tests, no depedencies needed
     script: skip  # we're not running tests

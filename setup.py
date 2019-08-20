@@ -11,7 +11,8 @@ setup(name='pefixup',
       author_email='a.rymdekoharvey@obscuritylabs.com',
       license='BSD 3.0',
       packages=[
-          'pefixup'
+          'pefixup',
+          'pefixup.src'
       ],
       classifiers=[
           # How mature is this project? Common values are
@@ -26,10 +27,10 @@ setup(name='pefixup',
       ],
       install_requires=[
           'setuptools',
-          '',
+          'pefile'
       ],
       scripts=[
           'pefixup/bin/pe_fixup.py'
       ],
       include_package_data=True,
-      zip_safe=False)
+      zip_safe=True)
