@@ -1,6 +1,47 @@
 # PeFixup
 PE File Blessing
 
+## Features
+Currently we have implemented the following tainting capabilities:
+* taint compile times within `IMAGE_FILE_HEADER`
+* taint major & minor compiler versions within `_IMAGE_OPTIONAL_HEADER`
+* taint multiple compile times within `DIRECTORY_ENTRY_DEBUG`
+* taint multiple pdb headers within `DIRECTORY_ENTRY_DEBUG & CV_INFO_PDB70`
+
+Currently we have implemented the following metadata capabilities:
+* Hashing
+    * MD5
+    * SHA1 
+    * SHA256
+    * SHA512
+    * imphash
+    * ssdeep
+* Imports
+    * All binary imports within `DIRECTORY_ENTRY_IMPORT`
+    * All binary import function name & addr
+    * Import function name checks to alert on potentially dangerous imports (AV/Analysis)
+* Binary metadata
+    * PE header data
+    * Binary Magic values
+    * EXIF data
+* Runtime Checks
+    * pre-flight checks 
+    * sanity checks
+    * post-flight checks
+    * burnt checks
+* Burnt checks
+    * providers
+        * VirusTotal (Checks Hash ONLY)
+    * binary sections (dynamic sections)
+        * non-cooked payload
+        * cooked payload
+        * .text
+        * .rdata
+        * .data
+        * .pdata
+        * .tls
+        * .rsrc
+
 ## Help & examples 
 
 ```bash
