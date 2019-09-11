@@ -22,28 +22,25 @@ def cli_parse():
     parser.add_argument("INPUT", help="input file to process")
     parser.add_argument("LIVE", help="output file name")
     # opts
-    parser.add_argument("-c", "--compile-time",
+    parser.add_argument("-c", "--compile-time", type=int,
                         help="Cooked payload epoc compile time to taint", default=1454680254)
 
-    parser.add_argument("-p", "--pdb",
+    parser.add_argument("-p", "--pdb", type=str,
                         help="Cooked payload PDB (Ex. fun)", default='pefixup')
 
-    parser.add_argument("-ma", "--major-linker-version",
+    parser.add_argument("-ma", "--major-linker-version", type=int,
                         help="Cooked payload major linker version to taint(Ex. 10)", default=10)
 
-    parser.add_argument("-mi", "--minor-linker-version",
+    parser.add_argument("-mi", "--minor-linker-version", type=int,
                         help="Cooked payload minor linker version to taint(Ex. 10)", default=2)
 
-    parser.add_argument("-o", "--output",
-                        help="output filename (Ex. FunTimes.exe)",)
-
     parser.add_argument("-json", "--json",
-                        help="output json to stdout",)
+                        help="output json to stdout",action="store_true")
 
     parser.add_argument("-s", "--strings",
                         help="Enable output file with strings (Ex. FunTimes.exe -> FunTimes.txt)", action="store_true")
 
-    parser.add_argument("-vt", "--vt-api-key",
+    parser.add_argument("-vt", "--vt-api-key", type=str,
                         help="VirusTotal API Key", default='')
 
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
