@@ -45,7 +45,7 @@ class MD5(Hashing):
 
     @staticmethod
     def get_digest_size(file_handle: IO[bytes]) -> int:
-        return hashlib.md5(file_handle).digest_size()
+        return hashlib.md5(file_handle).digest_size
 
 class SHA1(Hashing):
     """ SHA256 hashing"""
@@ -60,7 +60,7 @@ class SHA1(Hashing):
     
     @staticmethod      
     def get_digest_size(file_handle: IO[bytes]) -> int:
-        return hashlib.sha1(file_handle).digest_size()
+        return hashlib.sha1(file_handle).digest_size
 
 class SHA256(Hashing):
     """ SHA256 hashing"""
@@ -75,7 +75,7 @@ class SHA256(Hashing):
 
     @staticmethod  
     def get_digest_size(file_handle: IO[bytes]) -> int:
-        return hashlib.sha256(file_handle).digest_size()
+        return hashlib.sha256(file_handle).digest_size
 
 class SHA512(Hashing):
     """ SHA256 hashing"""
@@ -90,7 +90,7 @@ class SHA512(Hashing):
        
     @staticmethod 
     def get_digest_size(file_handle: IO[bytes]) -> int:
-        return hashlib.sha512(file_handle).digest_size()
+        return hashlib.sha512(file_handle).digest_size
 
 class IMP(Hashing):
     """ SHA256 hashing"""
@@ -98,7 +98,7 @@ class IMP(Hashing):
     @staticmethod
     def get_hash_digest(file_handle: str) -> bytes:
         pe = pefile.PE(file_handle)
-        return bytes(pe.get_imphash())
+        return bytes(str.encode(pe.get_imphash()))
 
     @staticmethod
     def get_hash_hexdigest(file_handle: str) -> str:
@@ -108,7 +108,7 @@ class IMP(Hashing):
     @staticmethod
     def get_digest_size(file_handle: str) -> int:
         pe = pefile.PE(file_handle)
-        x = bytes(pe.get_imphash())
+        x = bytes(str.encode(pe.get_imphash()))
         return len(x)
 
 class SSDEEP(Hashing):
@@ -116,7 +116,7 @@ class SSDEEP(Hashing):
 
     @staticmethod
     def get_hash_digest(file_handle: IO[bytes]) -> bytes:
-        return bytes(ssdeep.hash(file_handle))
+        return bytes(str.encode(ssdeep.hash(file_handle)))
 
     @staticmethod
     def get_hash_hexdigest(file_handle: IO[bytes]) -> str:
@@ -124,7 +124,7 @@ class SSDEEP(Hashing):
     
     @staticmethod
     def get_digest_size(file_handle: IO[bytes]) -> int:
-        x = bytes(ssdeep.hash(file_handle))
+        x = bytes(str.encode(ssdeep.hash(file_handle)))
         return len(x)
 
 

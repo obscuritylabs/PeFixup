@@ -15,7 +15,6 @@ before_install:
 
 install:
   - pip install -r requirements.txt
-  - pip install coveralls coverage nose
 
 script:
   - ls
@@ -23,6 +22,7 @@ script:
   # test to make sure build passes
   - python setup.py build 
   - python setup.py install 
+  - pytest --cov=.
 
 after_success:
   - coveralls

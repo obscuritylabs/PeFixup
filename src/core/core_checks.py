@@ -40,6 +40,7 @@ class VT(Checks):
         self.results = self._check()
 
     def check_seen(self) -> bool:
+        """ """
         if self.results['results']['response_code'] == 0:
             # if response 0: we have NOT been seen
             return False

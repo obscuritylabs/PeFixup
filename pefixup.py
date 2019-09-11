@@ -1,6 +1,5 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3.7
 import argparse
-from src.core import core_printer
 import config
 import json
 import logging
@@ -8,6 +7,7 @@ import os
 import sys
 
 from src.core import core_runtime
+from src.core import core_printer
 
 pr = core_printer.CorePrinters()
 
