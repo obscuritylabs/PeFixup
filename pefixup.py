@@ -40,6 +40,12 @@ def cli_parse():
     parser.add_argument("-json", "--json",
                         help="output json to stdout",)
 
+    parser.add_argument("-s", "--strings",
+                        help="Enable output file with strings (Ex. FunTimes.exe -> FunTimes.txt)", action="store_true")
+
+    parser.add_argument("-vt", "--vt-api-key",
+                        help="VirusTotal API Key", default='')
+
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")
 
@@ -52,6 +58,8 @@ def cli_parse():
         print("[!] Debug turned on:")
         for x in vars(args):
             print(f"   arg: ({x}) key: ({vars(args)[x]})")
+    if not config.VT_KEY:
+        config.VT_KEY = args.vt_api_key
     return args, parser
 
 

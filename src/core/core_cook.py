@@ -34,12 +34,46 @@ class CoreCook():
         self.taint.close()
 
     def dos_header(self):
+        """
+        typedef struct _IMAGE_DOS_HEADER {  // DOS .EXE header
+            USHORT e_magic;         // Magic number
+            USHORT e_cblp;          // Bytes on last page of file
+            USHORT e_cp;            // Pages in file
+            USHORT e_crlc;          // Relocations
+            USHORT e_cparhdr;       // Size of header in paragraphs
+            USHORT e_minalloc;      // Minimum extra paragraphs needed
+            USHORT e_maxalloc;      // Maximum extra paragraphs needed
+            USHORT e_ss;            // Initial (relative) SS value
+            USHORT e_sp;            // Initial SP value
+            USHORT e_csum;          // Checksum
+            USHORT e_ip;            // Initial IP value
+            USHORT e_cs;            // Initial (relative) CS value
+            USHORT e_lfarlc;        // File address of relocation table
+            USHORT e_ovno;          // Overlay number
+            USHORT e_res[4];        // Reserved words
+            USHORT e_oemid;         // OEM identifier (for e_oeminfo)
+            USHORT e_oeminfo;       // OEM information; e_oemid specific
+            USHORT e_res2[10];      // Reserved words
+            LONG   e_lfanew;        // File address of new exe header
+        } IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;
+        """
         print("[*] Walking DOS_HEADER:")
         print(f" - Target e_lfanew offset value: {hex(self.pe.DOS_HEADER.e_lfanew)}")
         self.target_offset = self.pe.DOS_HEADER.e_lfanew + 4
         print(f" - Set e_lfanew offset + PE bytes: {hex(self.pe.DOS_HEADER.e_lfanew+4)}")
 
     def image_file_header(self) -> bool:
+        """
+        typedef struct _IMAGE_FILE_HEADER {
+            USHORT  Machine;
+            USHORT  NumberOfSections;
+            ULONG   TimeDateStamp;
+            ULONG   PointerToSymbolTable;
+            ULONG   NumberOfSymbols;
+            USHORT  SizeOfOptionalHeader;
+            USHORT  Characteristics;
+        } IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;
+        """
         # now add 4 bytes to the value for the ASCII string 'PE'
         try:
             print("[*] Walking IMAGE_FILE_HEADER:")
@@ -61,6 +95,47 @@ class CoreCook():
         return True
 
     def image_optional_header(self) -> bool:
+        """
+        typedef struct _IMAGE_OPTIONAL_HEADER {
+            //
+            // Standard fields.
+            //
+            USHORT  Magic;
+            UCHAR   MajorLinkerVersion;
+            UCHAR   MinorLinkerVersion;
+            ULONG   SizeOfCode;
+            ULONG   SizeOfInitializedData;
+            ULONG   SizeOfUninitializedData;
+            ULONG   AddressOfEntryPoint;
+            ULONG   BaseOfCode;
+            ULONG   BaseOfData;
+            //
+            // NT additional fields.
+            //
+            ULONG   ImageBase;
+            ULONG   SectionAlignment;
+            ULONG   FileAlignment;
+            USHORT  MajorOperatingSystemVersion;
+            USHORT  MinorOperatingSystemVersion;
+            USHORT  MajorImageVersion;
+            USHORT  MinorImageVersion;
+            USHORT  MajorSubsystemVersion;
+            USHORT  MinorSubsystemVersion;
+            ULONG   Reserved1;
+            ULONG   SizeOfImage;
+            ULONG   SizeOfHeaders;
+            ULONG   CheckSum;
+            USHORT  Subsystem;
+            USHORT  DllCharacteristics;
+            ULONG   SizeOfStackReserve;
+            ULONG   SizeOfStackCommit;
+            ULONG   SizeOfHeapReserve;
+            ULONG   SizeOfHeapCommit;
+            ULONG   LoaderFlags;
+            ULONG   NumberOfRvaAndSizes;
+            IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
+        } IMAGE_OPTIONAL_HEADER, *PIMAGE_OPTIONAL_HEADER;
+        """
         try:
             print("[*] Walking IMAGE_OPTIONAL_HEADER:")
             print(f" - Magic offset value: {hex(self.pe.OPTIONAL_HEADER.__file_offset__)}")
@@ -90,6 +165,47 @@ class CoreCook():
         return True
 
     def directory_entry_debug(self) -> bool:
+        """
+        // Directory Entries
+        // Export Directory
+        #define IMAGE_DIRECTORY_ENTRY_EXPORT         0
+        // Import Directory
+        #define IMAGE_DIRECTORY_ENTRY_IMPORT         1
+        // Resource Directory
+        #define IMAGE_DIRECTORY_ENTRY_RESOURCE       2
+        // Exception Directory
+        #define IMAGE_DIRECTORY_ENTRY_EXCEPTION      3
+        // Security Directory
+        #define IMAGE_DIRECTORY_ENTRY_SECURITY       4
+        // Base Relocation Table
+        #define IMAGE_DIRECTORY_ENTRY_BASERELOC      5
+        // Debug Directory
+        #define IMAGE_DIRECTORY_ENTRY_DEBUG          6
+        // Description String
+        #define IMAGE_DIRECTORY_ENTRY_COPYRIGHT      7
+        // Machine Value (MIPS GP)
+        #define IMAGE_DIRECTORY_ENTRY_GLOBALPTR      8
+        // TLS Directory
+        #define IMAGE_DIRECTORY_ENTRY_TLS            9
+        // Load Configuration Directory
+        #define IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG    10
+
+        typedef struct _IMAGE_DATA_DIRECTORY {
+            ULONG   VirtualAddress;
+            ULONG   Size;
+        } IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;
+
+        typedef struct _IMAGE_DEBUG_DIRECTORY {
+            ULONG   Characteristics;
+            ULONG   TimeDateStamp;
+            USHORT  MajorVersion;
+            USHORT  MinorVersion;
+            ULONG   Type;
+            ULONG   SizeOfData;
+            ULONG   AddressOfRawData;
+            ULONG   PointerToRawData;
+        } IMAGE_DEBUG_DIRECTORY, *PIMAGE_DEBUG_DIRECTORY;
+        """
         print("[*] DEBUG INFO:")
         status = True
         for x in self.pe.DIRECTORY_ENTRY_DEBUG:
@@ -133,6 +249,7 @@ class CoreCook():
 
 
     def sanity_check(self):
+        """ Perform some basic checks to make sure we have completed all stomps."""
         # setup new file handle
         self.setup_cooked()
         # conduct analysis
@@ -161,6 +278,7 @@ class CoreCook():
                 print(f"[*] TimeDateStamp stomped properly for {debug_types[x.struct.Type]}: {colored('PASS', 'green')}")
 
     def populate_metadata(self):
+        """ Populate cooked metadata into our JSON model"""
         _md = self.model['cooked_payload']['metadata']
         _md['file_name'] = self.args.LIVE
         _md['md5'] = core_hash.MD5.get_hash_hexdigest(self.cooked)
@@ -174,8 +292,12 @@ class CoreCook():
         _md['exif'] = ex
         self.print_cooked_payload_metadata()
 
-    def runtime_burnt_check(self):
+    def runtime_burnt_check(self) -> bool:
         self.print_runtime_burnt_checks()
+        if not self.config.VT_KEY:
+            # no key set for VT skip
+            print(f"[*] No VirusTotal API key loaded (Skipping): {colored('WARNING', 'yellow')}")
+            return False
         print(f"[*] Starting checks VirusTotal HASH ONLY checks")
         vt = core_checks.VT(core_hash.SHA256.get_hash_hexdigest(self.raw), api_key=self.config.VT_KEY)
         # check non-cooked payload

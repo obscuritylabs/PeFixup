@@ -11,12 +11,14 @@ from . import core_preop
 from . import core_model
 from . import core_preflight
 from . import core_cook
+from . import core_postflight
 
 
 class CoreRuntime(core_printer.CorePrinters,
                   core_preop.CorePerOp,
                   core_preflight.CorePreFlight,
-                  core_cook.CoreCook
+                  core_cook.CoreCook,
+                  core_postflight.CorePostFlight
                   ):
 
     """
@@ -42,6 +44,7 @@ class CoreRuntime(core_printer.CorePrinters,
         core_preop.CorePerOp.__init__(self)
         core_preflight.CorePreFlight.__init__(self)
         core_cook.CoreCook.__init__(self)
+        core_postflight.CorePostFlight.__init__(self)
 
     def fix_up(self):
         #print(json.dumps(self.model, indent=2))
