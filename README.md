@@ -1,6 +1,34 @@
 # PeFixup
 PE File Blessing
 
+## Install PeFixup
+### Installl from source
+```bash
+$ git clone https://github.com/obscuritylabs/PeFixup.git
+$ cd Pefixup
+$ pip3 install -r requirements.txt
+$ python3 pefixup.py -h
+```
+**or using pipenv**
+```bash
+$ https://github.com/obscuritylabs/PeFixup.git
+$ cd Pefixup
+$ pipenv install
+$ pipenv shell 
+(PeFixup) bash-3.2$ 
+```
+### Installl from PYPI (Under Dev)
+```
+$ pip install --user pefixup
+$ pefixup -h
+```
+### Installl from DockerHub
+```
+$ docker pull obscuritylabs/pefixup:latest
+$ docker pull obscuritylabs/pefixup:0.0.1
+$ docker pull obscuritylabs/pefixup:development
+```
+
 ## Features
 Currently we have implemented the following tainting capabilities:
 * taint compile times within `IMAGE_FILE_HEADER`
