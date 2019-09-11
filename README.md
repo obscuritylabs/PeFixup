@@ -49,4 +49,6 @@ optional arguments:
  python3 pefixup.py ~/Desktop/RickJames.exe officeupdate.exe
  python3 pefixup.py ~/Desktop/RickJames.exe officeupdate.exe -c 1568192888 -p funtimes -ma 10 -mi 1 
  python3 pefixup.py ~/Desktop/RickJames.exe officeupdate.exe -c 1568192888 -p funtimes -ma 10 -mi 1 -vt 1G23<SNIP>212FT
+    or we can export the VT key 
+ export PEFIXUP_VT_KEY=1G23<SNIP>212FT && python3 pefixup.py ~/Desktop/RickJames.exe officeupdate.exe
 ```
