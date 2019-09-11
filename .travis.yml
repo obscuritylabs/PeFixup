@@ -1,14 +1,52 @@
 dist: bionic
 language: python
 cache: pip
+env:
+  global:
+    - USERNAME=obscuritylabs
+    - IMAGE=pefixup
+
 python:
-#  - "3.4"
-#  - "3.5"
-  - "3.6"
-  - "3.7"
-  - "3.7-dev"  # 3.7 development branch
-  - "3.8-dev"  # 3.8 development branch
-  - "nightly"  # nightly build
-  
+  - '3.6'
+  - '3.7'
+
 before_install:
   - sudo apt-get install build-essential libffi-dev libfuzzy-dev ssdeep
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - ls
+  # - pytest
+  # test to make sure build passes
+  - python setup.py build 
+  - python setup.py install 
+  - pytest --cov=.
+
+after_success:
+  - coveralls
+
+
+jobs:
+  include:
+  - stage: Deploy Docker
+    python: 3.6
+    install: skip  # no tests, no depedencies needed
+    script: skip  # we're not running tests
+    before_deploy:
+      - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin
+    deploy:
+      # deploy development to docker hub
+      - provider: script
+        script: 
+          - bash ./scripts/release_docker.sh
+        on:
+          branch: development
+
+      # deploy master to docker hub
+      - provider: script
+        script: 
+          - bash ./scripts/release_docker.sh
+        on:
+          branch: master
