@@ -1,5 +1,13 @@
 # PeFixup
-PE File Blessing
+PE File Blessing - A PE tainting tool
+- [PeFixup](#pefixup)
+  * [Install PeFixup](#install-pefixup)
+    + [Installl from source](#installl-from-source)
+    + [Installl from PYPI (Under Dev)](#installl-from-pypi--under-dev-)
+    + [Installl from DockerHub](#installl-from-dockerhub)
+  * [Features](#features)
+  * [Help & examples](#help---examples)
+    + [Examples](#examples)
 
 ## Install PeFixup
 ### Installl from source
