@@ -10,8 +10,8 @@ RUN apt-get update && \
   	ssdeep
 
 
-COPY ./requirements.txt /opt/pefixup/requirements.txt
+COPY . /opt/pefixup/
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["pe_fixup.py"]
+ENTRYPOINT ["pefixup.py"]
