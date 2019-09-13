@@ -7,4 +7,5 @@ pytest==5.1.2
 coverage==4.5.4
 pytest-cov==2.7.1
 virustotal-api==1.1.10
+pyexifinfo
 coveralls
