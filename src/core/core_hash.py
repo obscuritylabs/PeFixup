@@ -48,7 +48,7 @@ class MD5(Hashing):
         return hashlib.md5(file_handle).digest_size
 
 class SHA1(Hashing):
-    """ SHA256 hashing"""
+    """ SHA1 hashing"""
 
     @staticmethod
     def get_hash_digest(file_handle: IO[bytes]) -> bytes:
@@ -78,7 +78,7 @@ class SHA256(Hashing):
         return hashlib.sha256(file_handle).digest_size
 
 class SHA512(Hashing):
-    """ SHA256 hashing"""
+    """ SHA512 hashing"""
 
     @staticmethod
     def get_hash_digest(file_handle: IO[bytes]) -> bytes:
@@ -93,7 +93,7 @@ class SHA512(Hashing):
         return hashlib.sha512(file_handle).digest_size
 
 class IMP(Hashing):
-    """ SHA256 hashing"""
+    """ IMP hashing"""
 
     @staticmethod
     def get_hash_digest(file_handle: str) -> bytes:
