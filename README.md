@@ -11,7 +11,7 @@ PE File Blessing - A PE tainting tool
     + [Example Output](#example-output)
 
 ## Install PeFixup
-### Installl from source
+### Install from source
 ```bash
 $ git clone https://github.com/obscuritylabs/PeFixup.git
 $ cd Pefixup
@@ -26,12 +26,12 @@ $ pipenv install
 $ pipenv shell 
 (PeFixup) bash-3.2$ 
 ```
-### Installl from PYPI (Under Dev)
+### Install from PYPI (Under Dev)
 ```
 $ pip install --user pefixup
 $ pefixup -h
 ```
-### Installl from DockerHub
+### Install from DockerHub
 ```
 $ docker pull obscuritylabs/pefixup:latest
 $ docker pull obscuritylabs/pefixup:0.0.1
