@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/obscuritylabs/PeFixup.svg?branch=master)](https://travis-ci.com/obscuritylabs/PeFixup)
 # PeFixup
 PE File Blessing - A PE tainting tool
 - [PeFixup](#pefixup)
@@ -11,7 +12,17 @@ PE File Blessing - A PE tainting tool
     + [Example Output](#example-output)
 
 ## Install PeFixup
-### Installl from source
+### Required Packages
+#### Ubuntu 18.04+
+```bash
+apt-get update && \
+  	apt-get install -y --no-install-recommends \
+  	libffi-dev \
+  	libfuzzy-dev \
+  	ssdeep
+```
+
+### Install from source
 ```bash
 $ git clone https://github.com/obscuritylabs/PeFixup.git
 $ cd Pefixup
@@ -26,12 +37,12 @@ $ pipenv install
 $ pipenv shell 
 (PeFixup) bash-3.2$ 
 ```
-### Installl from PYPI (Under Dev)
+### Install from PYPI (Under Dev)
 ```
 $ pip install --user pefixup
 $ pefixup -h
 ```
-### Installl from DockerHub
+### Install from DockerHub
 ```
 $ docker pull obscuritylabs/pefixup:latest
 $ docker pull obscuritylabs/pefixup:0.0.1
