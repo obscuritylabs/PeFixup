@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/obscuritylabs/PeFixup.svg?branch=master)](https://travis-ci.com/obscuritylabs/PeFixup)
 # PeFixup
 PE File Blessing - A PE tainting tool
 - [PeFixup](#pefixup)
