@@ -19,7 +19,7 @@ apt-get update && \
   	apt-get install -y --no-install-recommends \
   	libffi-dev \
   	libfuzzy-dev \
-  	ssdeep \
+   ssdeep \
    exiftool
 ```
 
