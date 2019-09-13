@@ -12,6 +12,16 @@ PE File Blessing - A PE tainting tool
     + [Example Output](#example-output)
 
 ## Install PeFixup
+### Required Packages
+#### Ubuntu 18.04+
+```bash
+apt-get update && \
+  	apt-get install -y --no-install-recommends \
+  	libffi-dev \
+  	libfuzzy-dev \
+  	ssdeep
+```
+
 ### Install from source
 ```bash
 $ git clone https://github.com/obscuritylabs/PeFixup.git
